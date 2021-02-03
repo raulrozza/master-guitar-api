@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "dev:server": "tsnd --inspect --transpile-only --ignore-watch node_modules src/server.ts",
+    "start": "ts-node src/shared/infra/http/server.ts",
+    "dev:server": "tsnd -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/infra/http/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "typeorm": "tsnd ./node_modules/typeorm/cli.js"
+    "typeorm": "tsnd -r tsconfig-paths/register ./node_modules/typeorm/cli.js"
   },
   "keywords": [],
   "author": "",
@@ -41,6 +42,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "prettier": "^2.2.1",
     "ts-node-dev": "^1.1.1",
+    "tsconfig-paths": "^3.9.0",
     "typescript": "^4.1.3"
   }
 }
