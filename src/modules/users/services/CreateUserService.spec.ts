@@ -1,11 +1,16 @@
 import AppError from '@shared/errors/AppError';
+import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
 import FakeUsersRepository from '../repositories/fakes/FakeUserRepository';
 import CreateUserService from './CreateUserService';
 
 describe('CreateUserService', () => {
     it('should be able to create a new user', async () => {
         const fakeUsersRepository = new FakeUsersRepository();
-        const createUserService = new CreateUserService(fakeUsersRepository);
+        const fakeHashProvider = new FakeHashProvider();
+        const createUserService = new CreateUserService(
+            fakeUsersRepository,
+            fakeHashProvider,
+        );
 
         const user = await createUserService.execute({
             name: 'marcos',
@@ -18,7 +23,11 @@ describe('CreateUserService', () => {
 
     it('should not be able to create a user with an existing email', async () => {
         const fakeUsersRepository = new FakeUsersRepository();
-        const createUserService = new CreateUserService(fakeUsersRepository);
+        const fakeHashProvider = new FakeHashProvider();
+        const createUserService = new CreateUserService(
+            fakeUsersRepository,
+            fakeHashProvider,
+        );
 
         const repeatingEmail = 'marcos@gmail.com';
 
